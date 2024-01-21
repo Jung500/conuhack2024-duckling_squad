@@ -40,11 +40,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=9eecc8e6-b16f-4e9e-9625-6de825c0fe5f&limit=${Constants.TOTAL_QUESTIONS}`)
+    fetch(`https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=7a84331f-8b5d-41dd-8e53-0bf92ab675e7&limit=${Constants.TOATL_SAMPLE}`)
       .then(async (res) => {
         const data = await res.json();
 
-        setDataVariable(data.result.records);
+        setDataSampleForm(data.result.records);
         console.log("fetch successful 2");
       })
       .catch(error => console.log('Error fetching data', error));
@@ -52,6 +52,7 @@ function App() {
 
   var userAge = 2; // just for testing
 
+  console.log(dataSampleForm)
   if (dataSampleForm.length > 0) {
     const statAge = dataSampleForm.filter(record => (record.AGE <= userAge + 1 && record.AGE >= userAge - 1 && record.Q21r1 === 0));
     const range = dataSampleForm.filter(record => (record.AGE <= userAge + 1 && record.AGE >= userAge - 1));
