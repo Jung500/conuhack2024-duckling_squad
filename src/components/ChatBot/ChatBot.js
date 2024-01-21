@@ -20,6 +20,9 @@ function Chatbot() {
         {id: 'Autre2', question: 'Avez vous fait un business case?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
         {id: 'Autre3', question: 'Avec vous un business plan?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
         {id: 'Autre4', question: 'Avez vous fait une analyse sur le retour d investissement?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
+        {id: 'Autre5', question: 'Avez vous fait un business case?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
+        {id: 'Autre6', question: 'Avec vous un business plan?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
+        {id: 'Autre7', question: 'Avez vous fait une analyse sur le retour d investissement?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
     ];
 
     
@@ -79,7 +82,7 @@ function Chatbot() {
         const firstQuestion = questions[currentQuestionIndex];
         const botMessage = (
         <BotMessage
-            key="1"
+            key={`bot_${ new Date().getTime() }`}
             message={{ ...firstQuestion, type: 'question' }}
             onOptionSelected={handleOptionSelected}
         />
@@ -101,7 +104,7 @@ function Chatbot() {
     const sendQuestion = (question) => {
         const botMessage = (
         <BotMessage
-            key={messages.length + 1}
+            key={`bot_${ new Date().getTime() }`}
             message={{ ...question, type: 'question' }}
             onOptionSelected={handleOptionSelected}
         />
@@ -112,7 +115,7 @@ function Chatbot() {
 
     const send = async (text, isOption = false, optionIndex = null) => {
         // Add the user's message
-        const userMessage = <UserMessage key={messages.length + 1} text={text} />;
+        const userMessage = <UserMessage key={`user_${ new Date().getTime() }`} text={text} />;
         setMessages(prevMessages => [...prevMessages, userMessage]);
     };
 
