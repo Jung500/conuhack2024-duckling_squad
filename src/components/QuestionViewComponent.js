@@ -29,7 +29,7 @@ function QuestionViewComponent(props) {
                         value={answer.id}
                         onChange={handleAnswerChange}
                         checked={selectedAnswer && selectedAnswer.id === answer.id}
-                        disabled={selectedAnswer !== null}
+                        //disabled={selectedAnswer !== null}
                     />
                     {answer.name}
                     </label>
