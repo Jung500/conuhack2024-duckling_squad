@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 export default function BotMessage({ message, onOptionSelected }) {
 
     if (!message) {
-        // Render nothing or a placeholder if message is null
         return null;
     }
 
@@ -14,7 +13,7 @@ export default function BotMessage({ message, onOptionSelected }) {
           <div className="bot-message">{message.text}</div>
           <div className="bot-options">
             {message.options.map((option, index) => (
-              <button key={index} onClick={() => onOptionSelected(option)}>{option}</button>
+              <button key={index} onClick={() => onOptionSelected(option, index)}>{option}</button>
             ))}
           </div>
         </div>

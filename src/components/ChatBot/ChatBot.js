@@ -48,7 +48,7 @@ function Chatbot() {
     loadWelcomeMessage();
   }, []);
 
-  const handleOptionSelected = option => {
+  const handleOptionSelected = (option, index) => {
     if (option === 'Start') {
       // Load the first question when 'Start' is selected
       const firstQuestion = questions[currentQuestionIndex];
@@ -62,13 +62,19 @@ function Chatbot() {
       setMessages(prevMessages => [...prevMessages, botMessage]);
     } else {
       // Handle other options as before
-      send(option, true);
+      send(option, true, index);
     }
   };
 
-  const send = async (text, isOption = false) => {
+  const send = async (text, isOption = false, optionIndex = null) => {
+    let displayText = text;
+    if (isOption && optionIndex !== null) {
+        // If it's an option, append the index to the display text
+        //displayText = `${text} (option ${optionIndex + 1})`;
+    }
+    
     // Add the user's message
-    const userMessage = <UserMessage key={messages.length + 1} text={text} />;
+    const userMessage = <UserMessage key={messages.length + 1} text={displayText} />;
     setMessages(prevMessages => [...prevMessages, userMessage]);
   
     if (isOption) {
