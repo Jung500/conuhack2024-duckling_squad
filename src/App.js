@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import { React, useState } from 'react';
+
 import './App.css';
+
+import QuestionAnswerComponent from './components/QuestionAnswerComponent';
 
 function App() {
   const [estVisible, setEstVisible] = useState(true);
 
   const cacherBouton = () => {
     setEstVisible(false);
+  };
+
+  const question = "Quelle est votre couleur préférée ?";
+  const answers = [
+    { id: 1, name: 'Rouge' },
+    { id: 2, name: 'Bleu' },
+    { id: 3, name: 'Vert' },
+    { id: 4, name: 'Jaune' },
+    { id: 5, name: 'Brun' },
+    { id: 6, name: 'Mauve' },
+  ];
+
+  const [person, setPerson] = useState({
+    name: null,
+  });
+
+  const handleAnswerChange = (selectedOption) => {
+    setPerson({
+      ...person,
+      name: selectedOption.name,
+    });
   };
 
   return (
@@ -24,6 +47,12 @@ function App() {
               Commencer
             </button>
           )}
+          {/*<QuestionAnswerComponent 
+            question={question}
+            answers={answers}
+            person={person}
+            onAnswerChange={handleAnswerChange}
+          />*/}
         </body>
       </div>
     </div>
