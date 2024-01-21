@@ -1,0 +1,29 @@
+.QuestionViewContainer {
+    float: right;
+    margin-left: auto; /* Push the container to the right */
+    margin-right: 10%;
+    width: 300px;
+    background-color: rgb(44, 44, 47);
+    /*color: black;*/
+    border: 5px solid red;
+    border-radius: 20px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .UserAnswerViewContainer {
+    float: left;
+    margin-right: auto; /* Push the container to the right */
+    margin-left: 10%;
+    width: 300px;
+    background-color: rgb(44, 44, 47);
+    /*color: black;*/
+    border: 5px solid blue;
+    border-radius: 20px;
+    border-bottom-left-radius: 0px;
+  }
+
+.QuestionAnswerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
