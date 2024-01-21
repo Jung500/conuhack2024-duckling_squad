@@ -22,12 +22,21 @@ function Chatbot() {
       text: "What's your favorite animal?",
       options: ['Dog', 'Cat', 'Bird'],
     },
+    {
+        text: "What's your favorite month?",
+        options: ['Jan', 'Feb', 'mar'],
+      },
     // Add more questions as needed
   ];
 
   useEffect(() => {
     async function loadWelcomeMessage() {
-      const welcomeMessage = await API.GetChatbotResponse("Question 1");
+      const welcomeMessage = {
+        text: "Welcome to the chatbot! Click 'Start' to begin.",
+        options: ['Start'],
+        type: 'question'
+      };
+  
       setMessages([
         <BotMessage
           key="0"
@@ -39,30 +48,22 @@ function Chatbot() {
     loadWelcomeMessage();
   }, []);
 
-  useEffect(() => {
-    // Only proceed if there are more questions to ask
-    if (currentQuestionIndex < questions.length) {
-      const nextQuestion = questions[currentQuestionIndex];
-      const questionMessage = {
-        text: nextQuestion.text,
-        options: nextQuestion.options,
-        type: 'question'
-      };
-  
+  const handleOptionSelected = option => {
+    if (option === 'Start') {
+      // Load the first question when 'Start' is selected
+      const firstQuestion = questions[currentQuestionIndex];
       const botMessage = (
         <BotMessage
-          key={messages.length}
-          message={questionMessage}
+          key="1"
+          message={{ ...firstQuestion, type: 'question' }}
           onOptionSelected={handleOptionSelected}
         />
       );
       setMessages(prevMessages => [...prevMessages, botMessage]);
+    } else {
+      // Handle other options as before
+      send(option, true);
     }
-  }, [currentQuestionIndex]);
-
-  const handleOptionSelected = option => {
-    // Send the user's choice
-    send(option, true);
   };
 
   const send = async (text, isOption = false) => {
@@ -70,9 +71,23 @@ function Chatbot() {
     const userMessage = <UserMessage key={messages.length + 1} text={text} />;
     setMessages(prevMessages => [...prevMessages, userMessage]);
   
-    // Check if the message is a user's choice and proceed to the next question
-    if (isOption && currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentIndex => currentIndex + 1);
+    if (isOption) {
+      // Increment currentQuestionIndex to load the next question
+      setCurrentQuestionIndex(currentIndex => {
+        const nextIndex = currentIndex + 1;
+        if (nextIndex < questions.length) {
+          const nextQuestion = questions[nextIndex];
+          const botMessage = (
+            <BotMessage
+              key={messages.length + 2}
+              message={{ ...nextQuestion, type: 'question' }}
+              onOptionSelected={handleOptionSelected}
+            />
+          );
+          setMessages(prevMessages => [...prevMessages, botMessage]);
+        }
+        return nextIndex;
+      });
     } else {
       // Handle regular text message (e.g., initial greeting or non-option responses)
       const botResponse = await API.GetChatbotResponse(text);
