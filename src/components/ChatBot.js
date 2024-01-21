@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Constants } from "../Constants";
 
 import BotMessage from "./BotMessage";
+import BotMessageEnd from "./BotMessageEnd";
 import UserMessage from "./UserMessage";
 import Messages from "./Messages";
 import Input from "./Input";
@@ -14,6 +15,29 @@ function Chatbot() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
 
+    useEffect(() => {
+        if (currentQuestionIndex === 7) {
+            async function loadLastMessage() {
+                const welcomeMessage = {
+                    id: 8,
+                    question: " *NOTE : Manque de temps/Not enough time -Devs\nTo get your anwser enter your mastercard",
+                    reponseText: [],
+                    reponseValue: [],
+                    type: 'question'
+                };
+    
+                const botMessage = (
+                    <BotMessageEnd
+                        key="0"
+                        message={welcomeMessage}
+                    />
+                );
+                setMessages(prevMessages => [...prevMessages, botMessage]);
+
+            }
+            loadLastMessage();
+        }
+    }, [currentQuestionIndex]);
 
     // const questions = [
     //     { id: 'Autre1', question: 'Est vous un nouveau entrepreneur?', reponseText: ["non", "oui"], reponseValue: [0, 1] },
@@ -30,8 +54,8 @@ function Chatbot() {
         async function loadWelcomeMessage() {
             const welcomeMessage = {
                 id: 0,
-                question: "Welcome to the chatbot! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere ornare sapien, a imperdiet tellus iaculis vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi accumsan, purus non dignissim eleifend, felis sem varius diam, nec imperdiet urna nunc malesuada ligula. Nullam ornare bibendum diam. Click 'Start' to begin.",
-                reponseText: ['Start'],
+                question: "Bienvenue au service d'assistance pour entreprises en difficulté. Ce formulaire interactif a été conçu pour évaluer votre situation spécifique à travers une série de questions ciblées. À l'issue de ce questionnaire, nous analyserons vos réponses afin de vous fournir des recommandations sur mesure, adaptées à vos besoins et à ceux de votre entreprise. Veuillez cliquer sur « Démarrer » pour commencer cette expérience personnalisée.",
+                reponseText: ['Démarrer'],
                 reponseValue: [0],
                 type: 'question'
             };
@@ -49,7 +73,7 @@ function Chatbot() {
 
     const handleOptionSelected = (option, optionIndex, messageId) => {
 
-        if (option === 'Start') {
+        if (option === 'Démarrer') {
 
             loadFirstQuestion();
 

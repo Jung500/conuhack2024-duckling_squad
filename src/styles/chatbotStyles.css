@@ -4,9 +4,12 @@
     background: #f5f8fb;
     text-align: center;
     display: flex;
-    flex-flow: column;
+    /*flex-flow: column;*/
     width: 100%;
     overflow: hidden;
+
+    flex-direction: column; /* Organiser les enfants en colonne */
+    height: 100vh; /* Hauteur totale de la fenêtre de visualisation */
     
     box-sizing: border-box;
   }
@@ -27,23 +30,47 @@
     display: flex;
     flex-direction: column;
     padding: 10px 0px;
+    flex-grow: 1;
   }
   
   .message-container {
     width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .message-container-end {
+    display: flex;
+    justify-content: center; /* Centrer horizontalement le contenu */
+    align-items: center; /* Centrer verticalement si nécessaire */
+    width: 100%;
+    
+    margin: 20px 0px;
   }
   
   .bot-message {
     float: left;
-    padding: 15px 20px;
+    padding: 30px 20px;
     margin: 5px;
     border-radius: 20px 20px 20px 1px;
     background: #00aaa5;
     color: white;
     min-width: 40px;
 
-    margin-left: 50px;
-    max-width: 500px;
+    margin-left: 10%;
+    width: 300px;
+  }
+
+  .bot-message-end {
+    padding: 30px 20px;
+    margin: 5px;
+    border-radius: 20px;
+    background:  #00aaa5;
+    color: white;
+    min-width: 40px;
+
+    margin-left: 10%;
+    width: 70%;
   }
   
   .user-message {
@@ -55,11 +82,15 @@
     color: black;
 
     margin-right: 50px;
-    max-width: 500px;
+    max-width: 300px;
+    min-width: 50px;
+
+    visibility: hidden;
   }
   
   .input {
-    position: relative;
+    position: sticky;
+    bottom: 0;
   }
   
   .input > form > input[type="text"] {

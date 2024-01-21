@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Header() {
-  return <div className="header">&nbsp;ChatBot Help Entreprises</div>;
+  return <div className="header">&nbsp;Bridge Bot</div>;
 }
