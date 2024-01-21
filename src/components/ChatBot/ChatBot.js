@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Constants } from "../../Constants";
 
 import BotMessage from "./BotMessage";
 import UserMessage from "./UserMessage";
@@ -15,16 +16,11 @@ function Chatbot() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
 
-    const questions = [
-        {id: 'Autre1', question: 'Est vous un nouveau entrepreneur?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
-        {id: 'Autre2', question: 'Avez vous fait un business case?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
-        {id: 'Autre3', question: 'Avec vous un business plan?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
-        {id: 'Autre4', question: 'Avez vous fait une analyse sur le retour d investissement?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
-    ];
+    const questions = Constants.ALL_QUESTION;
 
-    
+
     useEffect(() => {
-        {/*  When userResponses changes, do ...*/}
+        {/*  When userResponses changes, do ...*/ }
     }, [userResponses]);
 
     useEffect(() => {
@@ -36,12 +32,12 @@ function Chatbot() {
                 reponseValue: [0],
                 type: 'question'
             };
-  
+
             setMessages([
                 <BotMessage
-                key="0"
-                message={welcomeMessage}
-                onOptionSelected={handleOptionSelected}
+                    key="0"
+                    message={welcomeMessage}
+                    onOptionSelected={handleOptionSelected}
                 />
             ]);
         }
@@ -59,10 +55,10 @@ function Chatbot() {
 
             const currentQuestion = questions[currentQuestionIndex];
             const response = {
-            questionId: messageId,
-            optionId: optionIndex,
-            option: option,
-            reponseValue: currentQuestion.reponseValue[optionIndex]
+                questionId: messageId,
+                optionId: optionIndex,
+                option: option,
+                reponseValue: currentQuestion.reponseValue[optionIndex]
             };
 
             setUserResponses(prevResponses => [...prevResponses, response]);
@@ -78,11 +74,11 @@ function Chatbot() {
         // Load the first question when 'Start' is selected
         const firstQuestion = questions[currentQuestionIndex];
         const botMessage = (
-        <BotMessage
-            key="1"
-            message={{ ...firstQuestion, type: 'question' }}
-            onOptionSelected={handleOptionSelected}
-        />
+            <BotMessage
+                key="1"
+                message={{ ...firstQuestion, type: 'question' }}
+                onOptionSelected={handleOptionSelected}
+            />
         );
         setMessages(prevMessages => [...prevMessages, botMessage]);
     }
@@ -90,21 +86,21 @@ function Chatbot() {
     const loadNextQuestion = () => {
         // Increment currentQuestionIndex to load the next question
         setCurrentQuestionIndex(currentIndex => {
-        const nextIndex = currentIndex + 1;
-        if (nextIndex < questions.length) {
-            sendQuestion(questions[nextIndex]);
-        }
-        return nextIndex;
+            const nextIndex = currentIndex + 1;
+            if (nextIndex < questions.length) {
+                sendQuestion(questions[nextIndex]);
+            }
+            return nextIndex;
         });
     };
-  
+
     const sendQuestion = (question) => {
         const botMessage = (
-        <BotMessage
-            key={messages.length + 1}
-            message={{ ...question, type: 'question' }}
-            onOptionSelected={handleOptionSelected}
-        />
+            <BotMessage
+                key={messages.length + 1}
+                message={{ ...question, type: 'question' }}
+                onOptionSelected={handleOptionSelected}
+            />
         );
         setMessages(prevMessages => [...prevMessages, botMessage]);
     };
