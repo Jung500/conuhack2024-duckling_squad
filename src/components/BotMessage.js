@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./styles.css";
+import "../styles/chatbotStyles.css";
 
 export default function BotMessage({ message, onOptionSelected }) {
     const [isAnswered, setIsAnswered] = useState(false);

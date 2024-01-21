@@ -6,9 +6,7 @@ import Messages from "./Messages";
 import Input from "./Input";
 import Header from "./Header";
 
-import API from "./ChatBotAPI";
-
-import "./styles.css";
+import "../styles/chatbotStyles.css";
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);
