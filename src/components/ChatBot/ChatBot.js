@@ -15,6 +15,7 @@ function Chatbot() {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userResponses, setUserResponses] = useState([]);
 
+
     const questions = [
         {id: 'Autre1', question: 'Est vous un nouveau entrepreneur?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
         {id: 'Autre2', question: 'Avez vous fait un business case?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
@@ -24,11 +25,6 @@ function Chatbot() {
         {id: 'Autre6', question: 'Avec vous un business plan?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
         {id: 'Autre7', question: 'Avez vous fait une analyse sur le retour d investissement?', reponseText: [ "non", "oui"], reponseValue: [ 0, 1]},
     ];
-
-    
-    useEffect(() => {
-        {/*  When userResponses changes, do ...*/}
-    }, [userResponses]);
 
     useEffect(() => {
         async function loadWelcomeMessage() {
@@ -52,6 +48,7 @@ function Chatbot() {
     }, []);
 
     const handleOptionSelected = (option, optionIndex, messageId) => {
+        
         if (option === 'Start') {
 
             loadFirstQuestion();

@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
+import "./styles.css";
 
 export default function BotMessage({ message, onOptionSelected }) {
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
 
     if (!message) {
         return null;
@@ -8,18 +12,37 @@ export default function BotMessage({ message, onOptionSelected }) {
 
   return (
     <div className="message-container">
-      {message.type === 'question' ? (
-        <div>
-          <div className="bot-message">{message.question}</div>
-          <div className="bot-options">
-            {message.reponseText && message.reponseText.map((option, index) => (
-              <button key={index} onClick={() => onOptionSelected(option, index, message.id)}>{option}</button>
-            ))}
-          </div>
+            {message.type === 'question' ? (
+                <div>
+                    <div className="bot-message">{message.question}</div>
+                    <div className="bot-options">
+                        {message.reponseText && message.reponseText.map((option, index) => {
+                            const onClickHandler = () => {
+                                setIsAnswered(true);
+                                setSelectedOptionIndex(index);
+                                onOptionSelected(option, index, message.id);
+                            };
+
+                            const backgroundColor = isAnswered
+                                ? (index === selectedOptionIndex ? "black" : "darkgreen")
+                                : "#45a049";
+
+                            return (
+                                <button 
+                                    key={index} 
+                                    onClick={onClickHandler} 
+                                    disabled={isAnswered}
+                                    style={{backgroundColor}}
+                                >
+                                    {option}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            ) : (
+                <div className="bot-message">{message.question}</div>
+            )}
         </div>
-      ) : (
-        <div className="bot-message">{message.question}</div>
-      )}
-    </div>
   );
 }
