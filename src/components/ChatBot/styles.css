@@ -1,6 +1,5 @@
 .chatbot {
     font-family: monospace;
-    border-radius: 10px;
     box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
     background: #f5f8fb;
     text-align: center;
@@ -9,8 +8,6 @@
     width: 100%;
     overflow: hidden;
     
-    height: 100vh;
-    border: 10px solid black;
     box-sizing: border-box;
   }
   
@@ -46,6 +43,7 @@
     min-width: 40px;
 
     margin-left: 50px;
+    max-width: 500px;
   }
   
   .user-message {
@@ -57,10 +55,11 @@
     color: black;
 
     margin-right: 50px;
+    max-width: 500px;
   }
   
   .input {
-    /*position: relative;*/
+    position: relative;
   }
   
   .input > form > input[type="text"] {
@@ -99,6 +98,14 @@
     top: 0;
   }
 
+  .bot-options {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap; 
+    margin: 10px 0;
+    margin-right: 40%;
+  }
+
   .bot-options button {
     background-color: #4CAF50;
     color: white;
@@ -107,6 +114,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    min-width: 70px;
   }
   
   .bot-options button:hover {

@@ -4,6 +4,7 @@ import BotMessage from "./BotMessage";
 import UserMessage from "./UserMessage";
 import Messages from "./Messages";
 import Input from "./Input";
+import Header from "./Header";
 
 import API from "./ChatBotAPI";
 
@@ -32,7 +33,7 @@ function Chatbot() {
   useEffect(() => {
     async function loadWelcomeMessage() {
       const welcomeMessage = {
-        text: "Welcome to the chatbot! Click 'Start' to begin.",
+        text: "Welcome to the chatbot! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere ornare sapien, a imperdiet tellus iaculis vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi accumsan, purus non dignissim eleifend, felis sem varius diam, nec imperdiet urna nunc malesuada ligula. Nullam ornare bibendum diam. Click 'Start' to begin.",
         options: ['Start'],
         type: 'question'
       };
@@ -112,8 +113,9 @@ function Chatbot() {
 
   return (
     <div className="chatbot">
-      <Messages messages={messages} />
-      <Input onSend={send} />
+        <Header />
+        <Messages messages={messages} />
+        <Input onSend={send} />
     </div>
   );
 }
